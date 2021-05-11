@@ -48,7 +48,7 @@ def NestedComBat(dat, covars, batch_list, categorical_cols=None, continuous_cols
         # RUN COMBAT
         print('ComBat with Raw Data...')
         output = nC.neuroCombat(dat, covars, batch_col, continuous_cols=continuous_cols,
-                                categorical_cols=categorical_cols)
+                                categorical_cols=categorical_cols)['data']
         output_df = pd.DataFrame.from_records(output.T)
         output_df.columns = dat.T.columns
         f_dict[batch_col] = output_df
@@ -92,7 +92,7 @@ def NestedComBat(dat, covars, batch_list, categorical_cols=None, continuous_cols
 
             # RUN COMBAT
             # print('ComBat with Raw Data...')
-            output = nC.neuroCombat(new_dat, covars, batch_col, continuous_cols=continuous_cols, categorical_cols=categorical_cols)
+            output = nC.neuroCombat(new_dat, covars, batch_col, continuous_cols=continuous_cols, categorical_cols=categorical_cols)['data']
             output_df = pd.DataFrame.from_records(output.T)
             output_df.columns = new_dat.T.columns
             f_dict[batch_col] = output_df
