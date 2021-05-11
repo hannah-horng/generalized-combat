@@ -95,7 +95,7 @@ def GMMComBat(dat, caseno, covars, filepath, categorical_cols=None, continuous_c
     split_df['Patient'] = split_df['Patient'].str.upper()
     split_df = split_df[split_df['Patient'].isin(caseno)].reset_index(drop=True)
     covars[split_col] = split_df[split_col]
-    output = nC.neuroCombat(dat, covars, split_col, continuous_cols=continuous_cols, categorical_cols=categorical_cols)
+    output = nC.neuroCombat(dat, covars, split_col, continuous_cols=continuous_cols, categorical_cols=categorical_cols)['data']
     output_df = pd.DataFrame.from_records(output.T)
     output_df.columns = dat.T.columns
     filepath_x = filepath + '2_GMM_Harmonization/Grouping/'
@@ -280,7 +280,7 @@ def MultiComBat(dat, covars, batch_list, categorical_cols=None, continuous_cols=
         # RUN COMBAT
         print('ComBat with Raw Data...')
         output = nC.neuroCombat(dat, covars, batch_col, continuous_cols=continuous_cols,
-                                categorical_cols=categorical_cols)
+                                categorical_cols=categorical_cols)['data']
         output_df = pd.DataFrame.from_records(output.T)
         output_df.columns = dat.T.columns
         f_dict[batch_col] = output_df
